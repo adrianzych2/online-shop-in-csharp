@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Dictionary<Codecool.CodecoolShop.Models.Product, int>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="~/css/cart.css"/>
+}
+
+@{
+    decimal totalPrice = 0;
+    foreach (var el in Model)
+    {
+        totalPrice += el.Key.DefaultPrice * el.Value;
+    }
+}
+
+<h1>Shopping Cart</h1>
+
+<div class="shopping-cart">
+    @foreach (var element in Model)
+    {
+        decimal productPrice = element.Key.DefaultPrice * element.Value;
+        <div class="product">
+            @*<div class="product-image">
+            <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+        </div>*@
+            <div class="product-details">
+                <div class="product-title">@element.Key.Name</div>
+            </div>
+            <div class="product-price">@element.Key.DefaultPrice @element.Key.Currency</div>
+            <div class="product-quantity">
+                <button class="plus-btn" type="button" onclick="location.href = '@Url.Action("Index", "Cart", new { buttonType = "increase", productId = element.Key.Id })'">+</button>
+                <h2 class="counter-value">@element.Value</h2>
+                <button class="minus-btn" type="button" onclick="location.href = '@Url.Action("Index", "Cart", new { buttonType = "decrease", productId = element.Key.Id })'">-</button>
+            </div>
+            <div class="product-removal">
+                <a class="remove-product" href="@Url.Action("Index", "Cart", new { buttonType = "delete", productId = element.Key.Id })">
+                    Remove
+                </a>
+            </div>
+            <div class="product-line-price">@productPrice @element.Key.Currency</div>
+        </div>
+    }
+    <br/>
+    <div class="totals">
+        <div class="totals-item">
+            <div class="totals-value" id="cart-subtotal">Subtotal: @totalPrice</div>
+        </div>
+    </div>
+    <button class="checkout" type="button" onclick="location.href = '@Url.Action("UserDataDetails", "Order")'">Checkout</button>
+</div>

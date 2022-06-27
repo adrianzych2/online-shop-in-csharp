@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using System.Security.Cryptography.X509Certificates
+@model Order
+@{
+    decimal totalPrice = 0;
+    foreach (var el in Model.OrderDetails)
+    {
+        totalPrice += el.NumberOfProduct * el.ProductPrice;
+    }
+}
+<section class="order">
+  <h1 class="order__title no-margin">Order summary</h1>
+  <svg id="svg-summary" width="24" height="24" viewBox="0 0 24 24">
+  <path d="M7,8V6H5V19H19V6H17V8H7M9,4A3,3 0 0,1 12,1A3,3 0 0,1 15,4H19A2,2 0 0,1 21,6V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V6A2,2 0 0,1 5,4H9M12,3A1,1 0 0,0 11,4A1,1 0 0,0 12,5A1,1 0 0,0 13,4A1,1 0 0,0 12,3Z"></path>
+</svg>
+  <section class="order__sub-sections order__subtotal clearfix ">
+    <h2 class="order__subtitles no-margin">Subtotal</h2>
+    <table id="values" class="order__subtotal__table">
+      <tbody>
+        <tr>
+          <td class="first-row">Product (<a href="#">@Model.OrderDetails.Sum(x=>x.NumberOfProduct) item/s</a>)</td>
+          <td class="first-row" align="right">@totalPrice USD</td>
+        </tr>
+        <tr>
+          <td>Delivery</td>
+          <td align="right">Free</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="values__total">Total</td>
+          <td class="values--total-price">@totalPrice USD</td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+  <section class="order__sub-sections order__address">
+    <h2 class="order__subtitles no-margin">Delivery address</h2>
+    <p class="address--client no-margin">@Model.UserData.Name</p>
+    <p class="address--street no-margin">@Model.UserData.Address</p>
+    <p class="address--region no-margin">@Model.UserData.City</p>
+    <p class="address--zipcode no-margin">@Model.UserData.Zipcode</p>
+  </section>
+</section>

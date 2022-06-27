@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model CreditCard
+<h4>Please enter your credit card details: </h4>
+<form asp-action="MakePayment" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="CardNumber">Card number: </label>
+        <input asp-for="CardNumber" />
+    </div>
+    <div>
+        <label asp-for="FirstName">First name: </label>
+        <input asp-for="FirstName" />
+    </div>
+    <div>
+        <label asp-for="LastName">Last name: </label>
+        <input asp-for="LastName" />
+    </div>
+    <div>
+        <label asp-for="ExpireMonth">Expire month: </label>
+        <input asp-for="ExpireMonth" />
+    </div>
+    <div>
+        <label asp-for="ExpireYear">Expire year: </label>
+        <input asp-for="ExpireYear" />
+    </div>
+    <div>
+        <label asp-for="CVV">CVV: </label>
+        <input type="password" asp-for="CVV" />
+    </div>
+    <button type="submit">Make the payment</button>
+</form>
