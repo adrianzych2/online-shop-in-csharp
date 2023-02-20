@@ -59,7 +59,7 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
+  /* Margin bottom by footer height */ //Css do Body w dwóch różnych plikach site.css i cart.css? Lepiej mieć to w jednym pliku a nie rozrzucac tak jakby body mialobyc inne dla rożnych stron?
   margin-bottom: 60px;
 }
 .footer {
