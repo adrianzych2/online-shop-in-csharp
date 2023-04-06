@@ -43,7 +43,7 @@ namespace Codecool.CodecoolShop.Controllers
                 _order.PaymentStatus = PaymentStatusEnum.Paid;
                 OrderService.UpdateOrder(_order);
                 OrderService.SaveToJson(_order);
-                MailService.MailSender(_order); //kiepska nazwa, jest to dobra nazwa na klase ale nie na metode. Lepiej nazwać SendEmails? albo coś co jest przymiotnikiem a nie rzeczownikiem.
+                MailService.SendEmails(_order); //kiepska nazwa, jest to dobra nazwa na klase ale nie na metode. Lepiej nazwać SendEmails? albo coś co jest przymiotnikiem a nie rzeczownikiem.
                 return RedirectToAction("OrderDetails", "Order", new {orderId = _order.Id});
             }
             else
