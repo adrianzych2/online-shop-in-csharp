@@ -15,7 +15,7 @@ namespace Codecool.CodecoolShop.Controllers
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
-        public ProductService ProductService { get; set; }
+        private ProductService ProductService { get; set; }
 
         private CartService CartService { get; set; }
 
@@ -39,7 +39,6 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Index(int id = 1, string categoryOrSupplier = "category")
         {
-            
             if (categoryOrSupplier != "category")
             {
                 var productsBySupplier = ProductService.GetProductsBySupplier(id);
